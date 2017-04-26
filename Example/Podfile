@@ -1,0 +1,6 @@
+use_frameworks!
+target 'WYKit_Tests' do
+  pod 'WYKit', :path => '../'
+  
+  
+end
