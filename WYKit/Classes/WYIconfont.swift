@@ -11,18 +11,16 @@ import CoreText
 
 #if os(iOS)
     import UIKit
-    public typealias WYColor = UIColor
     public typealias WYFont = UIFont
     public typealias WYImage = UIImage
 #else
     import AppKit
-    public typealias WYColor = NSColor
     public typealias WYFont = NSFont
     public typealias WYImage = NSImage
 #endif
 
 
-class WYIconfont: NSObject {
+public class WYIconfont: NSObject {
     private static var fontName = "FontAwesome"
     private static var fontPath = "fontawesome-webfont_4.6.3"
 
