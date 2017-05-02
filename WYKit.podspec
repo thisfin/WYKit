@@ -34,9 +34,9 @@ TODO: Add long description of the pod here.
   s.source_files = 'WYKit/Classes/**/*'
   s.requires_arc = true
   
-  # s.resource_bundles = {
-  #   'WYKit' => ['WYKit/Assets/*.png']
-  # }
+  s.resource_bundles = {
+    'WYKit' => ['WYKit/Assets/*.ttf']
+  }
 
   # s.public_header_files = 'Pod/Classes/**/*.h'
   # s.frameworks = 'UIKit', 'MapKit'

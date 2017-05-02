@@ -26,8 +26,11 @@ public class WYIconfont: NSObject {
 
     // once范例
     private static var oneTimeThing: () = {
-        let frameworkBundle: Bundle = Bundle(for: WYIconfont.classForCoder())
-        let path: String? = frameworkBundle.path(forResource: WYIconfont.fontPath, ofType: "ttf")
+        //TODO: framework的bundle和源的bundle做区分
+        let frameworkBundle: Bundle = Bundle.init(for: WYIconfont.classForCoder())
+        let resourceBundlePathString = frameworkBundle.path(forResource: "WYKit", ofType: ".bundle")
+        let resourceBundle: Bundle = Bundle.init(path: resourceBundlePathString!)!
+        let path: String? = resourceBundle.path(forResource: WYIconfont.fontPath, ofType: "ttf")
         if let dynamicFontData = NSData(contentsOfFile: path!) {
             let dataProvider: CGDataProvider? = CGDataProvider(data: dynamicFontData)
             let font: CGFont? = CGFont(dataProvider!)
