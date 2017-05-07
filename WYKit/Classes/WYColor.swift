@@ -67,4 +67,8 @@ extension WYColor {
 
         return UInt(i32)
     }
+
+    public func toHexString() -> String {
+        return String.init(format: "0x%02X%02X%02X%02X", Int.init(redComponent * 255), Int.init(greenComponent * 255), Int.init(blueComponent * 255), Int.init(alphaComponent * 255))
+    }
 }
