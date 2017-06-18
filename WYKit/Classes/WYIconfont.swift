@@ -22,7 +22,7 @@ import CoreText
 
 public class WYIconfont: NSObject {
     private static var fontName = "FontAwesome"
-    private static var fontPath = "fontawesome-webfont_4.6.3"
+    private static var fontPath = "fontawesome-webfont_4.7.0"
 
     // once范例
     private static var oneTimeThing: () = {

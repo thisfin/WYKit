@@ -69,6 +69,11 @@ extension WYColor {
     }
 
     public func toHexString() -> String {
+#if os(iOS)
+        let components = cgColor.components!
+        return String.init(format: "0x%02X%02X%02X%02X", Int.init(components[0] * 255), Int.init(components[1] * 255), Int.init(components[2] * 255), Int.init(components[3] * 255))
+#else
         return String.init(format: "0x%02X%02X%02X%02X", Int.init(redComponent * 255), Int.init(greenComponent * 255), Int.init(blueComponent * 255), Int.init(alphaComponent * 255))
+#endif
     }
 }
