@@ -69,11 +69,21 @@ extension WYColor {
     }
 
     public func toHexString() -> String {
-#if os(iOS)
-        let components = cgColor.components!
-        return String.init(format: "0x%02X%02X%02X%02X", Int.init(components[0] * 255), Int.init(components[1] * 255), Int.init(components[2] * 255), Int.init(components[3] * 255))
-#else
-        return String.init(format: "0x%02X%02X%02X%02X", Int.init(redComponent * 255), Int.init(greenComponent * 255), Int.init(blueComponent * 255), Int.init(alphaComponent * 255))
-#endif
+        #if os(iOS)
+            let components = cgColor.components!
+            return String.init(format: "0x%02X%02X%02X%02X", Int.init(components[0] * 255), Int.init(components[1] * 255), Int.init(components[2] * 255), Int.init(components[3] * 255))
+        #else
+            switch self.colorSpaceName {
+            case NSCalibratedRGBColorSpace:
+                return String.init(format: "0x%02X%02X%02X%02X", Int.init(redComponent * 255), Int.init(greenComponent * 255), Int.init(blueComponent * 255), Int.init(alphaComponent * 255))
+            case NSCalibratedWhiteColorSpace:
+                return String.init(format: "0x%02X%02X%02X%02X", Int.init(whiteComponent * 255), Int.init(whiteComponent * 255), Int.init(whiteComponent * 255), Int.init(alphaComponent * 255))
+            default:
+                if let color = self.usingColorSpaceName(NSCalibratedRGBColorSpace) {
+                    return String.init(format: "0x%02X%02X%02X%02X", Int.init(color.redComponent * 255), Int.init(color.greenComponent * 255), Int.init(color.blueComponent * 255), Int.init(color.alphaComponent * 255))
+                }
+                return ""
+            }
+        #endif
     }
 }
