@@ -16,7 +16,7 @@
 
 extension WYColor {
     public static func colorWithHexValue(_ hexValue: UInt, alpha: UInt = 255) -> WYColor {
-        let r: CGFloat = CGFloat(((hexValue & 0x00FF0000) >> 16) / 255)
+        let r: CGFloat = CGFloat((hexValue & 0x00FF0000) >> 16) / 255
         let g: CGFloat = CGFloat((hexValue & 0x0000FF00) >> 8) / 255
         let b: CGFloat = CGFloat(hexValue & 0x000000FF) / 255
         let a: CGFloat = CGFloat(alpha) / 255
