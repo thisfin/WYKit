@@ -21,8 +21,8 @@ import CoreText
 
 
 public class WYIconfont: NSObject {
-    private static var fontName = "FontAwesome"
-    private static var fontPath = "fontawesome-webfont_4.7.0"
+    private static var fontName = "Font Awesome 5 Free"
+    private static var fontPath = "fa-solid-900_5.0.9"
 
     // once范例
     private static var oneTimeThing: () = {
@@ -65,7 +65,7 @@ public class WYIconfont: NSObject {
         for i in stride(from: 500, to: 5, by: -2) {
             let rect = content.boundingRect(with: constraintSize,
                                             options: NSStringDrawingOptions.usesFontLeading,
-                                            attributes: [NSFontAttributeName: WYIconfont.fontOfSize(CGFloat(i))],
+                                            attributes: [NSAttributedStringKey.font: WYIconfont.fontOfSize(CGFloat(i))],
                                             context: nil)
             fontSize = i
             if rect.size.height <= size.height {
@@ -79,10 +79,10 @@ public class WYIconfont: NSObject {
             UIGraphicsBeginImageContextWithOptions(size, false, 0)
             backgroundColor.setFill()
             UIBezierPath(rect: textRext).fill()
-            content.draw(in:textRext, withAttributes: [NSFontAttributeName: WYIconfont.fontOfSize(CGFloat(fontSize)),
-                                                       NSForegroundColorAttributeName: iconColor,
-                                                       NSBackgroundColorAttributeName: backgroundColor,
-                                                       NSParagraphStyleAttributeName: {
+            content.draw(in:textRext, withAttributes: [NSAttributedStringKey.font: WYIconfont.fontOfSize(CGFloat(fontSize)),
+                                                       NSAttributedStringKey.foregroundColor: iconColor,
+                                                       NSAttributedStringKey.backgroundColor: backgroundColor,
+                                                       NSAttributedStringKey.paragraphStyle: {
                                                         let style = NSMutableParagraphStyle()
                                                         style.alignment = NSTextAlignment.center
                                                         return style}()])
@@ -111,15 +111,15 @@ public class WYIconfont: NSObject {
     }
 
     public static func imageWithIcon(content: String, backgroundColor: WYColor = WYColor.clear, iconColor: WYColor = WYColor.white, fontSize: CGFloat) -> WYImage {
-        let attributes = [NSFontAttributeName: WYIconfont.fontOfSize(fontSize),
-                          NSForegroundColorAttributeName: iconColor,
-                          NSBackgroundColorAttributeName: backgroundColor,
-                          NSParagraphStyleAttributeName: {
+        let attributes = [NSAttributedStringKey.font: WYIconfont.fontOfSize(fontSize),
+                          NSAttributedStringKey.foregroundColor: iconColor,
+                          NSAttributedStringKey.backgroundColor: backgroundColor,
+                          NSAttributedStringKey.paragraphStyle: {
                             let style = NSMutableParagraphStyle()
                             style.alignment = NSTextAlignment.center
                             return style}()]
         #if os(iOS)
-            var size = content.size(attributes: attributes)
+            var size = content.size(withAttributes: attributes)
             size = CGSize(width: size.width * 1.1, height: size.height * 1.05)
             UIGraphicsBeginImageContextWithOptions(size, false, 0)
             backgroundColor.setFill()

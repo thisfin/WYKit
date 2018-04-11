@@ -26,7 +26,7 @@ extension WYColor {
     // param string "aarrggbb" or "#aarrggbb" or "rrggbb" or "#rrggbb" or "rgb" or "#rgb"
     public static func colorWithString(_ string: String) -> WYColor {
         let string = string.lowercased()
-        let len = string.characters.count
+        let len = string.count
         if len == 3 || (len == 4 && string.hasPrefix("#")) || (len == 5 && string.hasPrefix("0x")) || len == 6 || (len == 7 && string.hasPrefix("#")) || (len == 8 && string.hasPrefix("0x")) {
             if let hexValue = hexValueOfString(string) {
                 return colorWithHexValue(hexValue)
@@ -45,14 +45,14 @@ extension WYColor {
         var string: String = string
 
         if string.hasPrefix("#") {
-            string = string.substring(from: string.index(string.startIndex, offsetBy: 1))
+            string = String(string.suffix(from: string.index(string.startIndex, offsetBy: 1)))
         } else if string.hasPrefix("0x") {
-            string = string.substring(from: string.index(string.startIndex, offsetBy: 2))
+            string = String(string.suffix(from: string.index(string.startIndex, offsetBy: 2)))
         }
 
-        if string.characters.count == 3 {
+        if string.count == 3 {
             var s = ""
-            string.characters.forEach({ (c) in
+            string.forEach({ (c) in
                 s.append(c)
                 s.append(c)
             })
